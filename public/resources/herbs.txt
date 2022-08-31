@@ -1,0 +1,29 @@
+appletree:wormwood
+barberry:yarrow
+blueberry:wolfbane
+burdock:chickweed
+cabbage:arnica
+carrot:thistle
+cauliflower:costmary
+chicory:borage
+cotton:mystic spinach
+crystalline:jaslah
+elderberry:honeysuckle
+foxglove:holly berry
+garlic:nightshade
+ginseng:mistletoe
+hemlock:tomato
+henbane:jimsonweed
+lettuce:water lily
+lobelia:comfrey
+mushroom:mangrel
+onion:bloodmoss
+pear:boneset
+plumtree:sweet flag
+potato:mandrake
+raspberry:bloodroot
+rhubarb:soapwort
+vine seed:lungwort
+spinach:h'cliz
+strawberry:mugwort
+turnip:mystic carrot
