@@ -4,6 +4,7 @@ import { IIngredientList } from "../types/ingredient";
 import { Materials } from '../types/materials';
 import { Organs } from '../types/organs';
 import { LoadState } from "../utils/load_state";
+import { DataSource } from "./data_source";
 import { FormatSelector } from "./format_selector";
 import { MaterialList } from "./material_list";
 
@@ -40,6 +41,7 @@ export class Potions extends React.Component<IPotionsProps, IPotionsState> {
     render() {
         return (
             <div>
+                <DataSource/>
                 <FormatSelector
                     materials={this.state.materials}
                     herbs={this.state.herbs}

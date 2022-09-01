@@ -1,3 +1,4 @@
+import './grid.css';
 import React from 'react';
 import { isConstructorDeclaration } from 'typescript';
 import { Herb, Herbs } from '../types/herbs';
@@ -50,7 +51,7 @@ export class Grid extends React.Component<IGridProps, IGridState> {
             <tr>
                 <th>&nbsp;</th>
                 {this.props.axisXIngredients.list.map((i: IIngredient) => {
-                    return <th key={i.toString()}>{i.toString()}</th>;
+                    return <th className='vertical-text' key={i.toString()}>{i.toString()}</th>;
                 })}
             </tr>
         )

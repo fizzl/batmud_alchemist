@@ -19,6 +19,7 @@
 }
 .button-selected {
     background-color: #d6ffcc;
+    /*background-color: #ffccd6;*/
     border: 1px solid #000;
     border-radius: 0px 5px 0px 0px;
 }

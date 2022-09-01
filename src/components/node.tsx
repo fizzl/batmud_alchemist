@@ -17,10 +17,7 @@ export class Node extends React.Component<INodeProps, INodeState> {
     }
     render() {
         return (
-            <div className="Node">
-                {this.props.material.toString()}
-                {this.props.herb.toString()}
-                {this.props.organ.toString()}
+            <div className="Node">-
             </div>
         );
     }

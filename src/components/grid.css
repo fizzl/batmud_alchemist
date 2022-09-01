@@ -1,0 +1,9 @@
+th {
+    background-color: #ffe6cc;
+    font-size: small;
+    font-weight: bold;
+}
+.vertical-text {
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+}
