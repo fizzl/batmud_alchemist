@@ -1,26 +1,23 @@
 import { ResourceLoader, IResourceLoaderTarget } from "../utils/resource_loader";
+import { IIngredient, IIngrediententList } from "./ingredient";
 
-export interface IOrgan {
-    name: string;
-    toString(): string;
-}
-export class Organ implements IOrgan {
+export class Organ implements IIngredient {
     constructor(public name: string) {
-
     }
     toString(): string {
         return this.name;
     }
 }
-export class Organs implements IResourceLoaderTarget{
-    organs: Organ[];
+export class Organs extends IIngrediententList implements IResourceLoaderTarget{
+    list: Organ[];
     
     constructor() {
-        this.organs = [];
+        super()
+        this.list = [];
     }
 
     ingest(line: string) {
-        this.organs.push(new Organ(line));
+        this.list.push(new Organ(line));
     }
 
     static async factory(): Promise<Organs> {
@@ -29,4 +26,3 @@ export class Organs implements IResourceLoaderTarget{
         return me;
     }
 }
-

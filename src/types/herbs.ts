@@ -1,9 +1,8 @@
 import { ResourceLoader, IResourceLoaderTarget } from "../utils/resource_loader";
+import { IIngredient, IIngrediententList } from "./ingredient";
 
-export interface IHerb {
-    name: string;
+export interface IHerb extends IIngredient{
     pair: string;
-    toString(): string;
 }
 export class Herb implements IHerb {
     constructor(public name: string, public pair: string) { 
@@ -14,16 +13,16 @@ export class Herb implements IHerb {
     }
 
 }
-export class Herbs implements IResourceLoaderTarget{
-    herbs: Herb[];
+export class Herbs extends IIngrediententList {
+    list: Herb[];
     
     constructor() {
-        this.herbs = [];
+        super();
+        this.list = [];
     }
-
     ingest(line: string) {
         const both = line.split(':');
-        this.herbs.push(new Herb(both[0], both[1]));
+        this.list.push(new Herb(both[0], both[1]));
     }
 
     static async factory(): Promise<Herbs> {

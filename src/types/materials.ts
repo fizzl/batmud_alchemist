@@ -1,10 +1,7 @@
 import { ResourceLoader, IResourceLoaderTarget } from "../utils/resource_loader";
+import { IIngredient, IIngrediententList } from "./ingredient";
 
-export interface IMaterial {
-    name: string;
-    toString(): string;
-}
-export class Material implements IMaterial {
+export class Material implements IIngredient {
     constructor(public name: string) {
     }
     toString(): string {
@@ -12,15 +9,16 @@ export class Material implements IMaterial {
     }
 }
 
-export class Materials implements IResourceLoaderTarget{
-    materials: IMaterial[];
+export class Materials extends IIngrediententList implements IResourceLoaderTarget{
+    list: Material[];
     
     constructor() {
-        this.materials = [];
+        super();
+        this.list = [];
     }
 
     ingest(line: string) {
-        this.materials.push(new Material(line));
+        this.list.push(new Material(line));
     }
 
     static async factory(): Promise<Materials> {
@@ -29,4 +27,3 @@ export class Materials implements IResourceLoaderTarget{
         return me;
     }
 }
-
