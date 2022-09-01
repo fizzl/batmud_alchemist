@@ -1,5 +1,5 @@
 import { ResourceLoader, IResourceLoaderTarget } from "../utils/resource_loader";
-import { IIngredient, IIngrediententList } from "./ingredient";
+import { IIngredient, IIngredientList } from "./ingredient";
 
 export interface IHerb extends IIngredient{
     pair: string;
@@ -13,7 +13,7 @@ export class Herb implements IHerb {
     }
 
 }
-export class Herbs extends IIngrediententList {
+export class Herbs extends IIngredientList {
     list: Herb[];
     
     constructor() {

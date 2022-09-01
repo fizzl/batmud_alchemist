@@ -1,16 +1,16 @@
 import './material_list.css';
 import React from 'react';
 import { Herbs } from '../types/herbs';
-import { Materials } from '../types/materials';
+import { Material, Materials } from '../types/materials';
 import { Organs } from '../types/organs';
 import { LoadState } from '../utils/load_state';
 import { Grid } from './grid';
-import { IIngredient, IIngrediententList } from '../types/ingredient';
+import { IIngredient, IIngredientList } from '../types/ingredient';
 
 interface IMaterialListProps {
-    indexIngredients: IIngrediententList;
-    axisXInrgedients: IIngrediententList;
-    axisyIngredients: IIngrediententList;
+    indexIngredients: IIngredientList;
+    axisXInrgedients: IIngredientList;
+    axisYIngredients: IIngredientList;
     loadState: LoadState;
 }
 
@@ -21,6 +21,24 @@ interface IMaterialListState {
 export class MaterialList extends React.Component<IMaterialListProps, IMaterialListState> {
     constructor(props: IMaterialListProps) {
         super(props);
+        this.state = {
+            selectedIndex: undefined,
+        }
+    }
+    componentDidUpdate(prevProps: IMaterialListProps) {
+        if(this.props.indexIngredients.list.length > 0) {
+            if(this.state.selectedIndex === undefined) {
+                this.setState({
+                    selectedIndex: this.props.indexIngredients.list[0]
+                });
+            }
+            if(this.props.indexIngredients !== prevProps.indexIngredients) {
+                this.setState({
+                    selectedIndex: this.props.indexIngredients.list[0]
+                });
+            }
+        }
+
     }
     render() {
         switch(this.props.loadState) {
@@ -35,6 +53,10 @@ export class MaterialList extends React.Component<IMaterialListProps, IMaterialL
         }
     }
     renderLoaded() {
+        console.log(JSON.stringify(this.state));
+        if(!this.state.selectedIndex) {
+            return <div>Loading...</div>;
+        }
         const buttons = this.props.indexIngredients.list.map((i: IIngredient) => {
             const classname = i.name === this.state.selectedIndex?.name ? 'button-selected' : 'button-normal';
             return (
@@ -48,7 +70,10 @@ export class MaterialList extends React.Component<IMaterialListProps, IMaterialL
         });
         const tab = this.props.indexIngredients.list.map((i) => {
             if(i.name === this.state.selectedIndex?.name) {
-                return <Grid key={i.name} material={material} herbs={this.state.herbs} organs={this.state.organs} />;
+                return <Grid key={i.name} 
+                    indexIngredient={this.state.selectedIndex} 
+                    axisXIngredients={this.props.axisXInrgedients}
+                    axisYIngredients={this.props.axisYIngredients}/>;
             }
         });
         return (
@@ -58,9 +83,9 @@ export class MaterialList extends React.Component<IMaterialListProps, IMaterialL
             </div>
         )
     }
-    onMaterialClick(material: IMaterial) {
+    onMaterialClick(material: Material) {
         this.setState({
-            selectedMaterial: material,
+            selectedIndex: material,
         });
     }
 }

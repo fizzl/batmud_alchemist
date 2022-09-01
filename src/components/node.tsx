@@ -1,12 +1,12 @@
 import React from 'react';
-import { IHerb } from '../types/herbs';
-import { IMaterial } from '../types/materials';
-import { IOrgan } from '../types/organs';
+import { Herb } from '../types/herbs';
+import { Material } from '../types/materials';
+import { Organ } from '../types/organs';
 
 interface INodeProps {
-    material: IMaterial
-    herb: IHerb
-    organ: IOrgan
+    material: Material
+    herb: Herb
+    organ: Organ
 }
 interface INodeState {
 }
@@ -25,6 +25,6 @@ export class Node extends React.Component<INodeProps, INodeState> {
         );
     }
     componentDidMount() {
-        console.log('Node componentDidMount', this.props);
+        //console.log('Node componentDidMount', this.props);
     }
 }

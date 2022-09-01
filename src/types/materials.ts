@@ -1,15 +1,17 @@
 import { ResourceLoader, IResourceLoaderTarget } from "../utils/resource_loader";
-import { IIngredient, IIngrediententList } from "./ingredient";
+import { IIngredient, IIngredientList } from "./ingredient";
 
 export class Material implements IIngredient {
+    pair: string;
     constructor(public name: string) {
+        this.pair = "";
     }
     toString(): string {
         return this.name;
     }
 }
 
-export class Materials extends IIngrediententList implements IResourceLoaderTarget{
+export class Materials extends IIngredientList implements IResourceLoaderTarget{
     list: Material[];
     
     constructor() {
@@ -27,3 +29,4 @@ export class Materials extends IIngrediententList implements IResourceLoaderTarg
         return me;
     }
 }
+

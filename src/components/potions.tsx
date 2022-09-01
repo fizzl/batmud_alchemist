@@ -1,34 +1,72 @@
 import React from "react";
-import { Herb, Herbs } from '../types/herbs';
-import { IIngrediententList } from "../types/ingredient";
-import { Material, Materials } from '../types/materials';
-import { Organ, Organs } from '../types/organs';
+import { Herbs } from '../types/herbs';
+import { IIngredientList } from "../types/ingredient";
+import { Materials } from '../types/materials';
+import { Organs } from '../types/organs';
 import { LoadState } from "../utils/load_state";
+import { FormatSelector } from "./format_selector";
 import { MaterialList } from "./material_list";
-import { Node } from './node';
 
 interface IPotionsProps {
 }
 interface IPotionsState {
-    materials: IIngrediententList;
-    herbs: IIngrediententList;
-    organs: IIngrediententList;
+    materials: IIngredientList;
+    herbs: IIngredientList;
+    organs: IIngredientList;
+    indexList: IIngredientList;
+    axisXList: IIngredientList;
+    axisYList: IIngredientList;
     loadState: LoadState;
-    error: any;
+    error?: any;
 }
 
 export class Potions extends React.Component<IPotionsProps, IPotionsState> {
     constructor(props: IPotionsProps) {
         super(props);
+        const materials = new Materials();
+        const herbs = new Herbs();
+        const organs = new Organs();
+        this.state = {
+            materials: materials,
+            herbs: herbs,
+            organs: organs,
+            indexList: materials,
+            axisXList: herbs,
+            axisYList: organs,
+            loadState: LoadState.INITIAL,
+        }
     }
 
     render() {
-        return(
-            <MaterialList/>
+        return (
+            <div>
+                <FormatSelector
+                    materials={this.state.materials}
+                    herbs={this.state.herbs}
+                    organs={this.state.organs}
+                    indexList={this.state.indexList}
+                    axisXList={this.state.axisXList}
+                    axisYList={this.state.axisYList}
+                    onFormatChange={this.onFormatChange.bind(this)}
+                />
+                <MaterialList
+                    indexIngredients={this.state.indexList}
+                    axisXInrgedients={this.state.axisXList}
+                    axisYIngredients={this.state.axisYList}
+                    loadState={this.state.loadState} />
+            </div>
         )
     }
+    onFormatChange(indexList: IIngredientList, axisXList: IIngredientList, axisYList: IIngredientList) {
+        console.log('onFormatChange', indexList, axisXList, axisYList);
+        this.setState({
+            indexList: indexList,
+            axisXList: axisXList,
+            axisYList: axisYList,
+        });
+    }
     async componentDidMount() {
-        if(this.state.loadState !== LoadState.INITIAL) {
+        if (this.state.loadState !== LoadState.INITIAL) {
             return;
         }
         console.log('MaterialList componentDidMount', this.props);
@@ -36,10 +74,16 @@ export class Potions extends React.Component<IPotionsProps, IPotionsState> {
             this.setState({
                 loadState: LoadState.LOADING
             });
-            this.setState({ 
-                materials: await Materials.factory(),
-                herbs: await Herbs.factory(),
-                organs: await Organs.factory(),
+            const materials = await Materials.factory();
+            const herbs = await Herbs.factory();
+            const organs = await Organs.factory();
+            this.setState({
+                materials: materials,
+                herbs: herbs,
+                organs: organs,
+                indexList: materials,
+                axisXList: herbs,
+                axisYList: organs,
                 loadState: LoadState.LOADED,
             });
         }

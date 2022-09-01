@@ -1,14 +1,16 @@
 import { ResourceLoader, IResourceLoaderTarget } from "../utils/resource_loader";
-import { IIngredient, IIngrediententList } from "./ingredient";
+import { IIngredient, IIngredientList } from "./ingredient";
 
 export class Organ implements IIngredient {
+    pair: string;
     constructor(public name: string) {
+        this.pair = "";
     }
     toString(): string {
         return this.name;
     }
 }
-export class Organs extends IIngrediententList implements IResourceLoaderTarget{
+export class Organs extends IIngredientList implements IResourceLoaderTarget{
     list: Organ[];
     
     constructor() {

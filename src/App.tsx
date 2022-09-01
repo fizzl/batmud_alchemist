@@ -1,9 +1,9 @@
 import './App.css';
-import { MaterialList } from './components/material_list';
+import { Potions } from './components/potions';
 
 function App() {
   return (
-    <MaterialList/>
+    <Potions/>
   );
 }
 
